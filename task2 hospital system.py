@@ -89,9 +89,9 @@ while (True):
                         if b==1:
                               cur.execute("select * from doctor;")
                               r=cur.fetchall()
-                              print("|D_ID |\t DOCTOR NAME |\tDEPARTMENT \t|\t FEES|\t MONTHLY SALARY|") 
+                              print("|D_ID |\t DOCTOR NAME |\tDEPARTMENT \t| FEES| MONTHLY SALARY|") 
                               for i in r:
-                                    print("|{}\t|{}\t\t|{}\t\t|{}\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4]))
+                                    print("|{}\t|{}\t|{}\t|{}\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4]))
 
                         if b==2:
                               did=int(input("enter doctor id"))
@@ -125,13 +125,24 @@ while (True):
                                                             """)
                         c=int(input("enter your choice"))
                         if c==1:
-                              name=input("enter name of patient")
-                              cur.execute("select * from patient where p_name ='%s'"%(name))
-                              r=cur.fetchall()
-                              print("| P_ID | PATIENT NAME \t| AGE | DOCTOR ASSIGNED |ENTRY DATE |DISCHARGE DATE |")
-                              for i in r:
-                                    print("|{}\t|{}\t\t|{}\t|{}\t\t|{}\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4],i[5]))
-
+                              print("""
+                                            1.ALL PATIENT
+                                            2.PARTICULAR PATIENT
+                                                                 """)
+                              d=int(input("enter your choice"))
+                              if d==1:
+                                    cur.execute("select * from patient;")
+                                    r=cur.fetchall()
+                                    print("| P_ID | PATIENT NAME \t| AGE  | DOCTOR ASSIGNED |ENTRY DATE |DISCHARGE DATE |")
+                                    for i in r:
+                                          print("|{}\t|{}\t\t|{}\t|{}\t|{}\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4],i[5]))
+                              if d==2:
+                                    name=input("enter name of patient")
+                                    cur.execute("select * from patient where p_name ='%s'"%(name))
+                                    r=cur.fetchall()
+                                    print("| P_ID | PATIENT NAME \t| AGE  | DOCTOR ASSIGNED |ENTRY DATE |DISCHARGE DATE |")
+                                    for i in r:
+                                          print("|{}\t|{}\t\t|{}\t|{}\t|{}\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4],i[5]))
 
                         if c==2:
                               pid=int(input("enter patient id"))
@@ -147,6 +158,11 @@ while (True):
                                            PATIENT ADDED """)
 
                         if c==3:
+                             cur.execute("select * from patient;")
+                              r=cur.fetchall()
+                              print("| P_ID | PATIENT NAME \t| AGE  | DOCTOR ASSIGNED |ENTRY DATE |DISCHARGE DATE |")
+                              for i in r:
+                                    print("|{}\t|{}\t\t|{}\t|{}\t|{}\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4],i[5]))
                               name=input("enter name of discharing patient")
                               s="delete from patient where p_name = '%s'"%(name)
                               cur.execute(s)
@@ -163,7 +179,7 @@ while (True):
                               print("| P_ID | PATIENT NAME \t| ENTRY DATE | DISCHARGE DATE | DOCTOR ASSIGNED \t| DEPARTMENT\
       | FEES |")
                               for i in r:
-                                    print("|{}\t|{}\t\t|{}\t|{}\t|{}\t\t|{}\t\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4],i[5],i[6]))
+                                    print("|{}\t|{}\t\t|{}|{}|{}\t\t|{}\t\t|{}\t|".format(i[0],i[1],i[2],i[3],i[4],i[5],i[6]))
                               
                         if c==5:
                               break
